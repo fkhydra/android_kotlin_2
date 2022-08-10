@@ -3,6 +3,8 @@ package com.example.myapplication
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
+import android.widget.TextView
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.location.*
@@ -36,12 +38,12 @@ class MainActivity : AppCompatActivity(),ActivityCompat.OnRequestPermissionsResu
    get_gpsdata()
   }
 
-  btnUjraindit.setOnClickListener {
+  findViewById<Button>(R.id.btnUjraindit).setOnClickListener {
    FirstRun = true
    tavolsag = 0.0F
   }
 
-  btnKilepes.setOnClickListener {
+  findViewById<Button>(R.id.btnKilepes).setOnClickListener {
    exitProcess(0)
   }
  }
@@ -83,9 +85,9 @@ class MainActivity : AppCompatActivity(),ActivityCompat.OnRequestPermissionsResu
       elozo_lat = akt_lat
       elozo_long = akt_long
       if(tavolsag < 9999)
-       infotext.text = "%d".format(sebesseg.toInt()) + "\n" + (tavolsag).toInt().toString()
+       findViewById<TextView>(R.id.infotext).text = "%d".format(sebesseg.toInt()) + "\n" + (tavolsag).toInt().toString()
       else
-       infotext.text = "%d".format(sebesseg.toInt()) + "\n" + (tavolsag/1000).toInt().toString()
+       findViewById<TextView>(R.id.infotext).text = "%d".format(sebesseg.toInt()) + "\n" + (tavolsag/1000).toInt().toString()
      }
     }
    }
