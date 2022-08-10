@@ -6,6 +6,7 @@ import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
+import android.widget.TextView
 
 public var SzenzorManager: SensorManager? = null
 public var mytext:String = ""
@@ -47,6 +48,6 @@ class MainActivity : AppCompatActivity() {
   if(SzenzorManager?.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR) != null) mytext += "\nROTATION_VECTOR YES"
   else mytext += "\nROTATION_VECTOR NO"
 
-  szoveg.text = mytext
+  findViewById<TextView>(R.id.szoveg).text = mytext
  }
 }
