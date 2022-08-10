@@ -16,6 +16,8 @@ import android.widget.SeekBar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker.PERMISSION_GRANTED
+import android.widget.TextView
+import android.widget.Button
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.*
 import java.text.SimpleDateFormat
@@ -32,6 +34,7 @@ public var fajlnev:String = sdf.format(Date()) + ".txt"
 public var idoertek_start:Calendar = Calendar.getInstance()
 public var idoertek_end:Calendar = Calendar.getInstance()
 public var FirstRun:Boolean = true
+public var myTxt:TextView
 
 public var magSensor: Sensor? = null
 public var magFigyelo: SensorEventListener? = null
@@ -63,7 +66,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
  override fun onProgressChanged(seek: SeekBar,
 progress: Int, fromUser: Boolean) {
   celertek = (progress + 1 ) * 5 * 1000
-  masodperckijelzo.text = ((progress+1)*5).toString() + " másodperc"
+  findViewById<TextView>(R.id.masodperckijelzo).text = ((progress+1)*5).toString() + " másodperc"
  }
 
  override fun onStartTrackingTouch(seek: SeekBar) {;}
@@ -71,11 +74,11 @@ progress: Int, fromUser: Boolean) {
  override fun onStopTrackingTouch(seek: SeekBar) {;}
  })
 
- btnUjraindit.setOnClickListener {
+ findViewById<Button>(R.id.btnUjraindit).setOnClickListener {
  fajlnev = sdf.format(Date()) + ".txt"
  }
 
- btnKilepes.setOnClickListener {
+ findViewById<Button>(R.id.btnKilepes).setOnClickListener {
  exitProcess(0)
  }
 }
@@ -92,7 +95,7 @@ override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out
 
  }
  else
- infotext.text = "Nincs engedély!"
+ findViewById<TextView>(R.id.infotext).text = "Nincs engedély!"
 }
 
 @SuppressLint("MissingPermission")
@@ -137,17 +140,18 @@ public fun get_gpsdata()
    alt_ertek = round(location?.speed!!.toFloat() * 3.6F)
    szoveg += "\nSeb.: %d".format(alt_ertek.toInt())+" km/h"
    szoveg += "\nLogfájl: "+fajlnev
-   infotext.text = szoveg
+   findViewById<TextView>(R.id.infotext).text = szoveg
 
+   myTxt = findViewById(R.id.iranyszoveg)
    irany = location?.bearing!!.toFloat()
-   if(irany > 350 || irany < 10) iranyszoveg.text = "É"
-   else if(irany > 10 && irany < 80) iranyszoveg.text = "ÉK"
-   else if(irany > 80 && irany < 100) iranyszoveg.text = "K"
-   else if(irany > 100 && irany < 170) iranyszoveg.text = "DK"
-   else if(irany > 170 && irany < 190) iranyszoveg.text = "D"
-   else if(irany > 190 && irany < 260) iranyszoveg.text = "DNY"
-   else if(irany > 260 && irany < 280) iranyszoveg.text = "NY"
-   else if(irany > 280 && irany < 350) iranyszoveg.text = "ÉNY"
+   if(irany > 350 || irany < 10) myTxt.text = "É"
+   else if(irany > 10 && irany < 80) myTxt.text = "ÉK"
+   else if(irany > 80 && irany < 100) myTxt.text = "K"
+   else if(irany > 100 && irany < 170) myTxt.text = "DK"
+   else if(irany > 170 && irany < 190) myTxt.text = "D"
+   else if(irany > 190 && irany < 260) myTxt.text = "DNY"
+   else if(irany > 260 && irany < 280) myTxt.text = "NY"
+   else if(irany > 280 && irany < 350) myTxt.text = "ÉNY"
 
    myszoveg = location?.longitude!!.toFloat().toString()+","+
 location?.latitude!!.toFloat().toString()+","+
