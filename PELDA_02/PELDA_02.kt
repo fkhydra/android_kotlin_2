@@ -8,6 +8,7 @@ import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
+import android.widget.TextView
 
 public var magSensor: Sensor? = null
 public var magFigyelo: SensorEventListener? = null
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
        {
         mytext = mytext + "\nMagneticRaw: "+event.values.contentToString()
        }
-       szoveg.text = mytext
+       findViewById<TextView>(R.id.szoveg).text = mytext
       }
      }
     }
