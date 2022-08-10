@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Environment
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main.*
+import android.widget.EditText
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
@@ -13,7 +14,7 @@ class MainActivity : AppCompatActivity() {
   super.onCreate(savedInstanceState)
   setContentView(R.layout.activity_main)
 
-  button.setOnClickListener {
+  findViewById<Button>(R.id.button).setOnClickListener {
    if(Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED)
    {
     val kulsofajl = File(this.getExternalFilesDir(null), "myfile2.txt")
@@ -21,11 +22,11 @@ class MainActivity : AppCompatActivity() {
    }
   }
 
-  button2.setOnClickListener {
+  findViewById<Button>(R.id.button2).setOnClickListener {
    if(Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED)
    {
     val kulsofajl = File(this.getExternalFilesDir(null), "myfile2.txt")
-    editText.setText(kulsofajl.readText())
+    findViewById<EditText>(R.id.editText).setText(kulsofajl.readText())
    }
   }
 
